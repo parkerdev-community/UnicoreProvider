@@ -24,6 +24,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         java-version: '17'
+        distribution: 'temurin'
     - name: Build with Gradle
       uses: eskatos/gradle-command-action@v1
       with:
