@@ -1,4 +1,4 @@
-package uno.unicore.unicoreprovider
+package uno.unicore.unicoreprovider.core
 
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
@@ -12,14 +12,17 @@ import pro.gravit.launchserver.auth.core.User
 import pro.gravit.launchserver.auth.core.UserSession
 import pro.gravit.launchserver.auth.core.interfaces.provider.AuthSupportExit
 import pro.gravit.launchserver.manangers.AuthManager
+import pro.gravit.launchserver.socket.Client
 import pro.gravit.launchserver.socket.response.auth.AuthResponse
+import uno.unicore.unicoreprovider.core.dto.AuthReport
+import uno.unicore.unicoreprovider.utils.UnicoreRequester
 import java.io.IOException
 import java.util.*
 
 
-class UnicoreProvider: AuthCoreProvider(), AuthSupportExit {
-    private lateinit var apiUrl: String
-    private lateinit var apiKey: String
+class UnicoreAuthProvider: AuthCoreProvider(), AuthSupportExit {
+    var apiUrl: String? = null
+    var apiKey: String? = null
     private lateinit var getUserByUsernameUrl: String
     private lateinit var getUserByUUIDUrl: String
     private lateinit var getUserByTokenUrl: String
@@ -28,6 +31,8 @@ class UnicoreProvider: AuthCoreProvider(), AuthSupportExit {
     private lateinit var authorizeUrl: String
     private lateinit var deleteSessionUrl: String
     private lateinit var exitUserUrl: String
+    private lateinit var checkServerUrl: String
+    private lateinit var joinServerUrl: String
 
     @Transient
     private val logger: Logger = LogManager.getLogger()
@@ -77,7 +82,13 @@ class UnicoreProvider: AuthCoreProvider(), AuthSupportExit {
         return try {
             val response = requester.post(refreshTokenUrl, RefreshTokenRequest(refreshToken, context)).getOrThrow<AuthReport>()
 
-            AuthManager.AuthReport(response.minecraftAccessToken, response.oauthAccessToken, response.oauthRefreshToken, response.oauthExpire!!, response.session)
+            return AuthManager.AuthReport(
+                response.minecraftAccessToken,
+                response.oauthAccessToken,
+                response.oauthRefreshToken,
+                response.oauthExpire * 1000,
+                response.session
+            )
         } catch (e: IOException) {
             logger.error(e)
             null
@@ -90,28 +101,43 @@ class UnicoreProvider: AuthCoreProvider(), AuthSupportExit {
         if (result.error != null)
             throw AuthException(result.error)
 
-        var response = result.getOrThrow<AuthReport>()
-        return AuthManager.AuthReport(response.minecraftAccessToken, response.oauthAccessToken, response.oauthRefreshToken, response.oauthExpire!!, response.session)
+        val response = result.getOrThrow<AuthReport>()
+
+        return AuthManager.AuthReport(
+            response.minecraftAccessToken,
+            response.oauthAccessToken,
+            response.oauthRefreshToken,
+            response.oauthExpire * 1000,
+            response.session
+        )
     }
 
     override fun deleteSession(session: UserSession): Boolean {
-        requester.post(deleteSessionUrl, session)
-        return true
+        return requester.post(deleteSessionUrl, session).response.isSuccessful
     }
 
     override fun exitUser(user: User): Boolean {
-        requester.post(exitUserUrl, user)
-        return true
+        return requester.post(exitUserUrl, user).response.isSuccessful
+    }
+
+    @Throws(IOException::class)
+    override fun checkServer(client: Client, username: String, serverID: String): User {
+        return requester.post(checkServerUrl, CheckServerRequest(username, serverID)).getOrThrow<HttpUser>()
+    }
+
+    @Throws(IOException::class)
+    override fun joinServer(client: Client, username: String, accessToken: String, serverID: String): Boolean {
+        return requester.post(joinServerUrl, JoinServerRequest(username, accessToken, serverID)).response.isSuccessful
     }
 
     @Suppress("SENSELESS_COMPARISON")
     override fun init(server: LaunchServer) {
         // Init provider config
         if(apiUrl == null)
-            throw IllegalArgumentException("[UnicoreProvider] 'apiUrl' can't be null")
+            throw IllegalArgumentException("UnicoreAuthProvider 'apiUrl' can't be null")
 
         if(apiKey == null)
-            throw IllegalArgumentException("[UnicoreProvider] 'apiKey' can't be null")
+            throw IllegalArgumentException("UnicoreAuthProvider 'apiKey' can't be null")
 
         // Set-up urls
         getUserByUsernameUrl = "$apiUrl/auth/gravit/getUserByUsername/%"
@@ -122,23 +148,11 @@ class UnicoreProvider: AuthCoreProvider(), AuthSupportExit {
         authorizeUrl = "$apiUrl/auth/gravit/authorize"
         deleteSessionUrl = "$apiUrl/auth/gravit/deleteSession"
         exitUserUrl = "$apiUrl/auth/gravit/exitUser"
+        checkServerUrl = "$apiUrl/auth/gravit/checkServer"
+        joinServerUrl = "$apiUrl/auth/gravit/joinServer"
 
         // Build UnicoreRequester
-        requester = UnicoreRequester(apiKey)
-
-        try {
-            val kernel = requester.get("$apiUrl/auth/gravit/ping").getOrThrow<Kernel>()
-            logger.info("[UnicoreProvider] Successfully initialized and send ping request [${kernel.uuid}]")
-        } catch (e: IOException) {
-            logger.error("[UnicoreProvider] apiKey not have permission 'kernel.unicore.provider' or incorrect!");
-        }
-    }
-
-    class AuthReport {
-        var minecraftAccessToken: String? = null
-        var oauthAccessToken: String? = null
-        var oauthRefreshToken: String? = null
-        var oauthExpire: Long? = null
-        var  session: HttpUserSession? = null
+        requester = UnicoreRequester(apiKey!!)
+        logger.info("UnicoreAuthProvider successfully initialized")
     }
 }

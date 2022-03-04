@@ -1,4 +1,4 @@
-package uno.unicore.unicoreprovider
+package uno.unicore.unicoreprovider.utils
 
 import okhttp3.Interceptor
 import okhttp3.Request
