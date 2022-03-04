@@ -5,11 +5,8 @@ import pro.gravit.launcher.modules.LauncherModule
 import pro.gravit.launcher.modules.LauncherModuleInfo
 import pro.gravit.launcher.modules.events.PreConfigPhase
 import pro.gravit.launchserver.auth.core.AuthCoreProvider
-import pro.gravit.launchserver.auth.session.SessionStorage
 import pro.gravit.utils.Version
 import uno.unicore.unicoreprovider.core.UnicoreAuthProvider
-import uno.unicore.unicoreprovider.session.UnicoreSessionStorage
-
 
 class UnicoreProviderModule : LauncherModule(LauncherModuleInfo("UnicoreProvider", version, arrayOf("LaunchServerCore"))) {
     companion object {
@@ -20,7 +17,6 @@ class UnicoreProviderModule : LauncherModule(LauncherModuleInfo("UnicoreProvider
     fun preInit(preConfigPhase: PreConfigPhase?) {
         if (!registered) {
             AuthCoreProvider.providers.register("unicore", UnicoreAuthProvider::class.java)
-            SessionStorage.providers.register("unicore", UnicoreSessionStorage::class.java)
             registered = true
         }
     }

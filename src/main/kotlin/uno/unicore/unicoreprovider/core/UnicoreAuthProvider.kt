@@ -3,6 +3,7 @@ package uno.unicore.unicoreprovider.core
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
 import pro.gravit.launcher.events.request.AuthRequestEvent
+import pro.gravit.launcher.events.request.GetAvailabilityAuthRequestEvent
 import pro.gravit.launcher.request.auth.AuthRequest
 import pro.gravit.launchserver.LaunchServer
 import pro.gravit.launchserver.auth.AuthException
@@ -18,7 +19,6 @@ import uno.unicore.unicoreprovider.core.dto.AuthReport
 import uno.unicore.unicoreprovider.utils.UnicoreRequester
 import java.io.IOException
 import java.util.*
-
 
 class UnicoreAuthProvider: AuthCoreProvider(), AuthSupportExit {
     var apiUrl: String? = null
@@ -95,6 +95,15 @@ class UnicoreAuthProvider: AuthCoreProvider(), AuthSupportExit {
         }
     }
 
+    override fun getDetails(client: Client?): List<GetAvailabilityAuthRequestEvent.AuthAvailabilityDetails> {
+        return try {
+            requester.get(getAuthDetailsUrl).getOrThrow<GetAuthDetailsResponse>().details
+        } catch (e: IOException) {
+            logger.error(e)
+            super.getDetails(client)
+        }
+    }
+
     override fun authorize(login: String, context: AuthResponse.AuthContext, password: AuthRequest.AuthPasswordInterface, minecraftAccess: Boolean): AuthManager.AuthReport {
         val result = requester.post(authorizeUrl, AuthorizeRequest(login, context, password, minecraftAccess))
 
@@ -120,12 +129,10 @@ class UnicoreAuthProvider: AuthCoreProvider(), AuthSupportExit {
         return requester.post(exitUserUrl, user).response.isSuccessful
     }
 
-    @Throws(IOException::class)
     override fun checkServer(client: Client, username: String, serverID: String): User {
         return requester.post(checkServerUrl, CheckServerRequest(username, serverID)).getOrThrow<HttpUser>()
     }
 
-    @Throws(IOException::class)
     override fun joinServer(client: Client, username: String, accessToken: String, serverID: String): Boolean {
         return requester.post(joinServerUrl, JoinServerRequest(username, accessToken, serverID)).response.isSuccessful
     }
