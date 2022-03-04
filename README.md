@@ -1,10 +1,10 @@
-# ZirconiaProvider ![Kotlin](https://img.shields.io/badge/-Kotlin-05122A?style=flat&logo=Kotlin&logoColor=FFA518)&nbsp;
-[![Build Status](https://github.com/ZirconiaStudio/ZirconiaProvider/actions/workflows/gradle.yml/badge.svg)](https://github.com/ZirconiaStudio/ZirconiaProvider/actions)
+# UnicoreProvider ![Kotlin](https://img.shields.io/badge/-Kotlin-05122A?style=flat&logo=Kotlin&logoColor=FFA518)&nbsp;
+[![Build Status](https://github.com/UnicoreProject/UnicoreProvider/actions/workflows/gradle.yml/badge.svg)](https://github.com/UnicoreProject/UnicoreProvider/actions)
 
-> Модуль для интеграции серсисов авторизации [ZirconiaCMS](https://github.com/ZirconiaStudio/ZirconiaCMS) и [GravitLauncher](https://github.com/GravitLauncher/Launcher)
+> Модуль для интеграции серсисов авторизации [UnicoreCMS](https://unicore.uno) и [GravitLauncher](https://github.com/GravitLauncher/Launcher)
 
 ## Сборка
-ZirconiaProvider использует Gradle для обработки зависимостей и сборки.
+UnicoreProvider использует Gradle для обработки зависимостей и сборки.
 
 #### Зависимости
 * Java 17 JDK или более поздней версии
@@ -12,8 +12,8 @@ ZirconiaProvider использует Gradle для обработки зави�
 
 #### Компиляция
 ```sh
-git clone https://github.com/ZirconiaStudio/ZirconiaProvider.git
-cd ZirconiaProvider/
+git clone https://github.com/UnicoreProject/UnicoreProvider.git
+cd UnicoreProvider/
 ./gradlew build
 ```
 
