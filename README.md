@@ -3,7 +3,7 @@
 # UnicoreProvider ![Kotlin](https://img.shields.io/badge/-Kotlin-05122A?style=flat&logo=Kotlin&logoColor=FFA518)&nbsp;
 [![Build Status](https://github.com/UnicoreProject/UnicoreProvider/actions/workflows/gradle.yml/badge.svg)](https://github.com/UnicoreProject/UnicoreProvider/actions)
 
-> Модуль для интеграции серсисов авторизации [UnicoreCMS](https://unicore.uno) и [GravitLauncher](https://github.com/GravitLauncher/Launcher)
+> Модуль для интеграции серсисов авторизации [UnicoreCMS](https://unicorecms.ru) и [GravitLauncher](https://github.com/GravitLauncher/Launcher)
 
 ## Установка и настройка
 1. Создайте API-ключ с правом `unicore.kernel.provider`.
