@@ -2,7 +2,7 @@
 
 # UnicoreProvider ![Kotlin](https://img.shields.io/badge/-Kotlin-05122A?style=flat&logo=Kotlin&logoColor=FFA518)&nbsp;
 [![Build Status](https://github.com/UnicoreProject/UnicoreProvider/actions/workflows/gradle.yml/badge.svg)](https://github.com/UnicoreProject/UnicoreProvider/actions)
-[![Telegram](https://img.shields.io/endpoint?style=social&url=https://runkit.io/damiankrawczyk/telegram-badge/branches/master?url=https://t.me/unicore_project)](https://t.me/zirconiacms)
+[![Telegram](https://img.shields.io/endpoint?style=social&url=https://runkit.io/damiankrawczyk/telegram-badge/branches/master?url=https://t.me/unicore_project)](https://t.me/unicore_project)
 
 > Модуль для интеграции серсисов авторизации [UnicoreCMS](https://unicorecms.ru) и [GravitLauncher](https://github.com/GravitLauncher/Launcher)
 
