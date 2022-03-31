@@ -3,12 +3,12 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.10'
 }
 
-def mainClassName = "uno.unicore.unicoreprovider.UnicoreProviderModule";
+def mainClassName = "ru.unicorecms.unicoreprovider.UnicoreProviderModule";
 sourceCompatibility = '17'
 targetCompatibility = '17'
 
 group 'uno.unicore'
-version '1.0.0-STABLE'
+version '1.0.1-STABLE'
 
 repositories {
     mavenCentral()

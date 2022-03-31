@@ -10,7 +10,7 @@ import ru.unicorecms.unicoreprovider.core.UnicoreAuthProvider
 
 class UnicoreProviderModule : LauncherModule(LauncherModuleInfo("UnicoreProvider", version, arrayOf("LaunchServerCore"))) {
     companion object {
-        val version = Version(1, 0, 0, 0, Version.Type.STABLE)
+        val version = Version(1, 0, 1, 0, Version.Type.STABLE)
         private var registered = false
     }
 
