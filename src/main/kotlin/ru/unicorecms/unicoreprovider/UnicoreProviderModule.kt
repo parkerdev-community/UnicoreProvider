@@ -1,4 +1,4 @@
-package uno.unicore.unicoreprovider
+package ru.unicorecms.unicoreprovider
 
 import pro.gravit.launcher.modules.LauncherInitContext
 import pro.gravit.launcher.modules.LauncherModule
@@ -6,11 +6,11 @@ import pro.gravit.launcher.modules.LauncherModuleInfo
 import pro.gravit.launcher.modules.events.PreConfigPhase
 import pro.gravit.launchserver.auth.core.AuthCoreProvider
 import pro.gravit.utils.Version
-import uno.unicore.unicoreprovider.core.UnicoreAuthProvider
+import ru.unicorecms.unicoreprovider.core.UnicoreAuthProvider
 
 class UnicoreProviderModule : LauncherModule(LauncherModuleInfo("UnicoreProvider", version, arrayOf("LaunchServerCore"))) {
     companion object {
-        val version = Version(1, 0, 0, 0, Version.Type.BETA)
+        val version = Version(1, 0, 0, 0, Version.Type.STABLE)
         private var registered = false
     }
 

@@ -1,4 +1,4 @@
-package uno.unicore.unicoreprovider.core.dto
+package ru.unicorecms.unicoreprovider.core.dto
 
 import pro.gravit.launchserver.auth.core.HttpAuthCoreProvider
 

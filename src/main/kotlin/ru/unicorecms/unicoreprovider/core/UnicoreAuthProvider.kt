@@ -1,4 +1,4 @@
-package uno.unicore.unicoreprovider.core
+package ru.unicorecms.unicoreprovider.core
 
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
@@ -15,8 +15,8 @@ import pro.gravit.launchserver.auth.core.interfaces.provider.AuthSupportExit
 import pro.gravit.launchserver.manangers.AuthManager
 import pro.gravit.launchserver.socket.Client
 import pro.gravit.launchserver.socket.response.auth.AuthResponse
-import uno.unicore.unicoreprovider.core.dto.AuthReport
-import uno.unicore.unicoreprovider.utils.UnicoreRequester
+import ru.unicorecms.unicoreprovider.core.dto.AuthReport
+import ru.unicorecms.unicoreprovider.utils.UnicoreRequester
 import java.io.IOException
 import java.util.*
 
