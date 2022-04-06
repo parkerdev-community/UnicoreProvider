@@ -7,7 +7,7 @@
 > Модуль для интеграции серсисов авторизации [UnicoreCMS](https://unicorecms.ru) и [GravitLauncher](https://github.com/GravitLauncher/Launcher)
 
 ## Установка и настройка
-1. Создайте API-ключ с правом `unicore.kernel.provider`.
+1. [Создайте API-ключ](https://unicorecms.ru/docs/admin/api-keys#создание-api-ключа) с правом `unicore.kernel.provider`.
 2. Поместите Jar-файл в **modules/**.
 3. Произведите настройку **LaunchServer.json**.
 
@@ -20,6 +20,10 @@
 },
 // ...
 ```
+
+#### Двухфакторная аутификация в лаунчере
+
+<img src="https://unicorecms.ru/img/2fa.jpg" />
 
 ## Сборка
 UnicoreProvider использует Gradle для обработки зависимостей и сборки.
