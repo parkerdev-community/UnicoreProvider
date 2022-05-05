@@ -46,7 +46,6 @@ class UnicoreAuthProvider: AuthCoreProvider(), AuthSupportExit {
         return try {
             requester.get(getUserByUsernameUrl, username).getOrThrow<HttpUser>()
         } catch (e: IOException) {
-            logger.error(e)
             null
         }
     }
@@ -55,7 +54,6 @@ class UnicoreAuthProvider: AuthCoreProvider(), AuthSupportExit {
         return try {
             requester.get(getUserByUUIDUrl, uuid.toString()).getOrThrow<HttpUser>()
         } catch (e: IOException) {
-            logger.error(e)
             null
         }
     }
@@ -73,7 +71,6 @@ class UnicoreAuthProvider: AuthCoreProvider(), AuthSupportExit {
 
             result.getOrThrow<HttpUserSession>()
         } catch (e: IOException) {
-            logger.error(e)
             null
         }
     }
@@ -90,7 +87,6 @@ class UnicoreAuthProvider: AuthCoreProvider(), AuthSupportExit {
                 response.session
             )
         } catch (e: IOException) {
-            logger.error(e)
             null
         }
     }
