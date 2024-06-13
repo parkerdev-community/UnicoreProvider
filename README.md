@@ -1,7 +1,7 @@
-<img src="https://github.com/UnicoreProject/UnicoreProvider/blob/main/unicoreprovider.png?raw=true" />
+<img src="https://github.com/parkerdev-community/UnicoreProvider/blob/main/unicoreprovider.png?raw=true" />
 
 # UnicoreProvider ![Kotlin](https://img.shields.io/badge/-Kotlin-05122A?style=flat&logo=Kotlin&logoColor=FFA518)&nbsp;
-[![Build Status](https://github.com/UnicoreProject/UnicoreProvider/actions/workflows/gradle.yml/badge.svg)](https://github.com/UnicoreProject/UnicoreProvider/actions)
+[![Build Status](https://github.com/parkerdev-community/UnicoreProvider/actions/workflows/gradle.yml/badge.svg)](https://github.com/parkerdev-community/UnicoreProvider/actions)
 
 > Модуль для интеграции серсисов авторизации [UnicoreCMS](https://unicorecms.ru) и [GravitLauncher](https://github.com/GravitLauncher/Launcher)
 
